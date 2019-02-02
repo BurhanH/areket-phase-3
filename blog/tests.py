@@ -8,9 +8,9 @@ from . import models
 class BlogTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
-            username='testuser',
+            username='test_user',
             email='test@email.com',
-            password='secret'
+            password='user_password'
         )
 
         self.post = models.Post.objects.create(
@@ -25,7 +25,7 @@ class BlogTests(TestCase):
 
     def test_post_content(self):
         self.assertEqual(f'{self.post.title}', 'Test title')
-        self.assertEqual(f'{self.post.author}', 'testuser')
+        self.assertEqual(f'{self.post.author}', 'test_user')
         self.assertEqual(f'{self.post.body}', 'Test body content')
 
     def test_post_list_view(self):
