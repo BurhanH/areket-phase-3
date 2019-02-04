@@ -35,9 +35,30 @@ class BlogTests(TestCase):
         self.assertTemplateUsed(response, 'home.html')
 
     def test_post_detail_view(self):
-        response = self.client.get('/post/1')
+        response = self.client.get('/post/1/')
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Test title')
         self.assertTemplateUsed(response, 'post_detail.html')
-        no_response = self.client.get('/post/100000')
+        no_response = self.client.get('/post/100000/')
         self.assertEqual(no_response.status_code, 404)
+
+    def test_post_create_view(self):
+        response = self.client.post(reverse('post_new'), {
+            'title': 'New Super Title',
+            'body': 'New text for blog',
+            'author': self.user,
+        })
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'New Super Title')
+        self.assertContains(response, 'New text for blog')
+
+    def test_post_update_view(self):
+        response = self.client.post(reverse('post_edit', args='1'), {
+            'title': 'Updated title',
+            'body': 'Updated text',
+        })
+        self.assertEqual(response.status_code, 302)
+
+    def test_post_delete_view(self):
+        response = self.client.get(reverse('post_delete', args='1'))
+        self.assertEqual(response.status_code, 200)
