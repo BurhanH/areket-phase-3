@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
-from django.urls import reverse
 
 
 class AccountTests(TestCase):
@@ -8,7 +7,7 @@ class AccountTests(TestCase):
         self.user = get_user_model().objects.create_user(
             username='new_user',
             email='new_user@mail.com',
-            password='new_user_password',
+            password='new_user',
         )
 
     def test_signup_view(self):
@@ -23,11 +22,11 @@ class AccountTests(TestCase):
 
     def test_login_functionality(self):
         self.assertTrue(
-            self.client.login(username='new_user', password='new_user_password'),
+            self.client.login(username='new_user', password='new_user'),
             'Unable to log in with provided credentials')
 
     def test_logout_functionality(self):
-        self.client.login(username='new_user', password='new_user_password')
+        self.client.login(username='new_user', password='new_user')
         session_id = self.client.session.session_key
         self.client.logout()
         self.assertNotEqual(
