@@ -5,6 +5,7 @@ TEST_USER = 'test_user'
 TEST_PASS = 'Supercallifragilisticexpialidocious!'
 TEST_EMAIL = 'test_user@mail.com'
 
+
 class AccountTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
