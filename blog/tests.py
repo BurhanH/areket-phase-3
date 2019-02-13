@@ -4,13 +4,17 @@ from django.urls import reverse
 
 from . import models
 
+TEST_USER = 'test_user'
+TEST_PASS = 'Supercallifragilisticexpialidocious!'
+TEST_EMAIL = 'test_user@mail.com'
+
 
 class BlogTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
-            username='test_user',
-            email='test@email.com',
-            password='test_user'
+            username=TEST_USER,
+            email=TEST_EMAIL,
+            password=TEST_PASS
         )
 
         self.post = models.Post.objects.create(
@@ -25,7 +29,7 @@ class BlogTests(TestCase):
 
     def test_post_content(self):
         self.assertEqual(f'{self.post.title}', 'Test title')
-        self.assertEqual(f'{self.post.author}', 'test_user')
+        self.assertEqual(f'{self.post.author}', TEST_USER)
         self.assertEqual(f'{self.post.body}', 'Test body content')
 
     def test_post_list_view(self):
