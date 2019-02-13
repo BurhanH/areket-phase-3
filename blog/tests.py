@@ -10,7 +10,7 @@ class BlogTests(TestCase):
         self.user = get_user_model().objects.create_user(
             username='test_user',
             email='test@email.com',
-            password='test_user'
+            password='user_password'
         )
 
         self.post = models.Post.objects.create(
