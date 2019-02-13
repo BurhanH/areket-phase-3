@@ -8,6 +8,7 @@ TEST_USER = 'test_user'
 TEST_PASS = 'Supercallifragilisticexpialidocious!'
 TEST_EMAIL = 'test_user@mail.com'
 
+
 class BlogTests(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
